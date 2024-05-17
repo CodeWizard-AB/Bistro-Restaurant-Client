@@ -47,7 +47,7 @@ function Carousel() {
 		],
 	};
 	return (
-		<div className="lg:px-40 my-20 px-4">
+		<div className="mt-24">
 			<Heading>
 				<p>---From 11:00am to 10:00pm---</p>
 				<p>ORDER ONLINE</p>
@@ -58,7 +58,7 @@ function Carousel() {
 						<figure key={i} className="relative px-2">
 							<img src={image} className="w-full object-cover h-full" />
 							<figcaption className="absolute bottom-0 left-1/2 -translate-x-1/2 text-3xl text-white drop-shadow-lg">
-								Hello
+								Food
 							</figcaption>
 						</figure>
 					))}
