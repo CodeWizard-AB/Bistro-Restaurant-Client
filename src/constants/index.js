@@ -12,4 +12,9 @@ const navigation = [
 	new Link("our shop", "/shop"),
 ];
 
-export { navigation };
+const navButtons = [
+	new Link("Log in", "/login"),
+	new Link("Sign up", "/signup"),
+];
+
+export { navigation, navButtons };
