@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { Link } from "react-router-dom";
 import ButtonContainer from "./Button";
 import Heading from "./Heading";
 import Hero from "./Hero";
@@ -6,7 +7,7 @@ import MenuItem from "./MenuItem";
 
 function MenuItems({ data, children, image }) {
 	return (
-		<div>
+		<div className="my-24">
 			{image ? (
 				<Hero image={image}>{children}</Hero>
 			) : (
@@ -16,13 +17,15 @@ function MenuItems({ data, children, image }) {
 				</Heading>
 			)}
 
-			<div className="grid md:grid-cols-2 gap-y-8 gap-x-10 my-20 last:*:w-fit last:*:mx-auto last:*:col-span-full last:*:mt-6">
-				{data.map((food) => (
+			<div className="grid md:grid-cols-2 gap-y-8 gap-x-10 my-20 last:*:w-fit last:*:mx-auto last:*:col-span-full last:*:mt-6 lg:px-40">
+				{data?.map((food) => (
 					<MenuItem key={food._id} food={food} />
 				))}
-				<ButtonContainer variant={"contained"}>
-					ORDER YOUR FAVOURITE FOOD
-				</ButtonContainer>
+				<Link to="/shop">
+					<ButtonContainer variant={"contained"}>
+						ORDER YOUR FAVOURITE FOOD
+					</ButtonContainer>
+				</Link>
 			</div>
 		</div>
 	);

@@ -24,7 +24,9 @@ function NavBar() {
 							<li key={index}>
 								<NavLink
 									to={link}
-									className={({ isActive }) => (isActive ? "text-main" : null)}
+									className={({ isActive }) =>
+										isActive ? "text-[#EEFF25]" : null
+									}
 								>
 									{title.toUpperCase()}
 								</NavLink>

@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import MenuItem from "./MenuItem";
 import Heading from "./Heading";
 import ButtonContainer from "./Button";
+import { Link } from "react-router-dom";
 
 function PopularMenu() {
 	const { data, isLoading } = useQuery({
@@ -26,7 +27,11 @@ function PopularMenu() {
 				{data.map((food) => (
 					<MenuItem key={food._id} food={food} />
 				))}
-				<ButtonContainer variant={"contained"}>View Full Menu</ButtonContainer>
+				<Link to="/menu">
+					<ButtonContainer variant={"contained"}>
+						View Full Menu
+					</ButtonContainer>
+				</Link>
 			</div>
 		</div>
 	);
