@@ -5,15 +5,10 @@ import MenuItem from "./MenuItem";
 import Heading from "./Heading";
 import ButtonContainer from "./Button";
 import { Link } from "react-router-dom";
+import useMenu from "../hooks/useMenu";
 
 function PopularMenu() {
-	const { data, isLoading } = useQuery({
-		queryKey: ["popularItems"],
-		queryFn: async () => {
-			const { data } = await axios("menu.json");
-			return data.filter((item) => item.category === "popular");
-		},
-	});
+	const { data, isLoading } = useMenu("popular");
 
 	if (isLoading) return <Loader />;
 

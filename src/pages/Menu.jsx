@@ -14,17 +14,17 @@ function Menu() {
 				<h2>our menu</h2>
 				<p>would you like to try a dish</p>
 			</Hero>
-			<MenuItems data={useMenu("offered")} />
-			<MenuItems data={useMenu("dessert")} image={dessert}>
+			<MenuItems data={useMenu("offered").data} />
+			<MenuItems data={useMenu("dessert").data} image={dessert}>
 				<p>Desserts</p>
 			</MenuItems>
-			<MenuItems data={useMenu("pizza")} image={pizza}>
+			<MenuItems data={useMenu("pizza").data} image={pizza}>
 				<p>Pizza</p>
 			</MenuItems>
-			<MenuItems data={useMenu("salad")} image={salad}>
+			<MenuItems data={useMenu("salad").data} image={salad}>
 				<p>Salads</p>
 			</MenuItems>
-			<MenuItems data={useMenu("soup")} image={soup}>
+			<MenuItems data={useMenu("soup").data} image={soup}>
 				<p>soups</p>
 			</MenuItems>
 		</div>

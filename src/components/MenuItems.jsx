@@ -21,7 +21,7 @@ function MenuItems({ data, children, image }) {
 				{data?.map((food) => (
 					<MenuItem key={food._id} food={food} />
 				))}
-				<Link to="/shop">
+				<Link to={`/shop/${data?.[0]?.category}`}>
 					<ButtonContainer variant={"contained"}>
 						ORDER YOUR FAVOURITE FOOD
 					</ButtonContainer>
