@@ -6,6 +6,7 @@ import ButtonContainer from "./Button";
 import { useAuth } from "../contexts/AuthContext";
 import Account from "./Account";
 import { useState } from "react";
+import Badges from "./Bagdes";
 
 function NavBar() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,10 @@ function NavBar() {
 						))}
 					</ul>
 					{user ? (
-						<Account />
+						<>
+							<Account />
+							<Badges />
+						</>
 					) : (
 						<div className="hidden lg:flex gap-4">
 							{navButtons?.map(({ title, link }, i) => (

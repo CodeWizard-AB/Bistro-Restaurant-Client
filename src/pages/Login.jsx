@@ -11,7 +11,6 @@ import {
 	Checkbox,
 	FormControlLabel,
 } from "@mui/material";
-
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ButtonContainer from "../components/Button";
@@ -156,7 +155,7 @@ function Login() {
 				</div>
 
 				<p className="text-sm mt-5 text-center">
-					Don’t have an account yet?{" "}
+					Don’t have an account yet?
 					<Link
 						to="/signup"
 						className="text-[#4F46E5] font-medium cursor-pointer hover:border-b hover:border-[#4F46E5]"

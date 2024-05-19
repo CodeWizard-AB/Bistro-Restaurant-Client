@@ -4,8 +4,27 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import useAxios from "../hooks/useAxios";
+import { useAuth } from "../contexts/AuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function ShopCard({ recipe }) {
+	const { user } = useAuth();
+	const navigate = useNavigate();
+	const postData = useAxios();
+	const handleCart = async () => {
+		const { _id, ...remaining } = recipe;
+		if (user) {
+			await postData.post("/cart", {
+				...remaining,
+				menu_id: _id,
+				buyer_email: user?.email,
+			});
+		} else {
+			navigate("/login", { state: `/shop/${recipe?.category}` });
+		}
+	};
+
 	return (
 		<Card sx={{ textAlign: "center" }}>
 			<CardMedia
@@ -26,6 +45,7 @@ export default function ShopCard({ recipe }) {
 					size="small"
 					variant="contained"
 					sx={{ marginX: "auto", marginBottom: 2 }}
+					onClick={handleCart}
 				>
 					add to card
 				</Button>
