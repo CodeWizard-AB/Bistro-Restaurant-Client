@@ -3,14 +3,13 @@ import { Sling as Hamburger } from "hamburger-react";
 import { Link, NavLink } from "react-router-dom";
 import { navigation, navButtons } from "../constants";
 import ButtonContainer from "./Button";
-// import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 import Account from "./Account";
 import { useState } from "react";
 
 function NavBar() {
 	const [isOpen, setIsOpen] = useState(false);
-	// const { user } = useAuth();
-	const user = null;
+	const { user } = useAuth();
 
 	return (
 		<header className="px-4 py-6 md:px-14 top-0 z-20 absolute w-full bg-[#15151580] text-white">

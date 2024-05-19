@@ -1,14 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import { Toaster } from "react-hot-toast";
 
 function App() {
+	const { pathname } = useLocation();
+	const noHeaderFooter = pathname !== "/login" && pathname !== "/signup";
 	return (
 		<div>
-			<NavBar />
+			<Toaster />
+			{noHeaderFooter && <NavBar />}
 			<Outlet />
-			<Footer />
-			{/* <ScrollRestoration /> */}
+			{noHeaderFooter && <Footer />}
 		</div>
 	);
 }

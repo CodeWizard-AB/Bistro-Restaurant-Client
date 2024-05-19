@@ -41,11 +41,7 @@ export default function ShopTabs() {
 			<Box sx={{ width: "100%", typography: "body1" }}>
 				<TabContext value={value}>
 					<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-						<TabList
-							onChange={(_, value) => setValue(value)}
-							aria-label="lab API tabs example"
-							centered
-						>
+						<TabList onChange={(_, value) => setValue(value)} centered>
 							{categories.map((category, i) => (
 								<Tab
 									label={category}
