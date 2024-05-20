@@ -2,6 +2,8 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useQuery } from "@tanstack/react-query";
+import useAxios from "../hooks/useAxios";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
 	"& .MuiBadge-badge": {
@@ -14,10 +16,19 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export default function Badges() {
+	const getData = useAxios();
+	const { data: cart } = useQuery({
+		queryKey: ["cart"],
+		queryFn: async () => {
+			const { data } = await getData("/cart");
+			return data.length;
+		},
+	});
+
 	return (
 		<IconButton aria-label="cart">
-			<StyledBadge badgeContent={4}>
-				<ShoppingCartIcon sx={{ color: "white"}} fontSize='large' />
+			<StyledBadge badgeContent={cart}>
+				<ShoppingCartIcon sx={{ color: "white" }} fontSize="large" />
 			</StyledBadge>
 		</IconButton>
 	);

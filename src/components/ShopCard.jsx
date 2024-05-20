@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useAxios from "../hooks/useAxios";
 import { useAuth } from "../contexts/AuthContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function ShopCard({ recipe }) {
 	const { user } = useAuth();
@@ -20,36 +21,46 @@ export default function ShopCard({ recipe }) {
 				menu_id: _id,
 				buyer_email: user?.email,
 			});
+			Swal.fire({
+				position: "top-end",
+				icon: "success",
+				title: "Your work has been saved",
+				showConfirmButton: false,
+				timer: 1500,
+			});
 		} else {
 			navigate("/login", { state: `/shop/${recipe?.category}` });
 		}
 	};
 
 	return (
-		<Card sx={{ textAlign: "center" }}>
-			<CardMedia
-				sx={{ height: 200 }}
-				image={recipe?.image}
-				title={recipe?.recipe}
-			/>
-			<CardContent>
-				<Typography gutterBottom variant="h5" component="div">
-					{recipe?.name}
-				</Typography>
-				<Typography variant="body2" color="text.secondary">
-					{recipe?.recipe}
-				</Typography>
-			</CardContent>
-			<CardActions>
-				<Button
-					size="small"
-					variant="contained"
-					sx={{ marginX: "auto", marginBottom: 2 }}
-					onClick={handleCart}
-				>
-					add to card
-				</Button>
-			</CardActions>
-		</Card>
+		<div className="relative">
+			<Card sx={{ textAlign: "center" }}>
+				<p className="absolute right-3 top-3 bg-black/50 rounded-sm text-white px-2">${recipe?.price}</p>
+				<CardMedia
+					sx={{ height: 200 }}
+					image={recipe?.image}
+					title={recipe?.recipe}
+				/>
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="div">
+						{recipe?.name}
+					</Typography>
+					<Typography variant="body2" color="text.secondary">
+						{recipe?.recipe}
+					</Typography>
+				</CardContent>
+				<CardActions>
+					<Button
+						size="small"
+						variant="contained"
+						sx={{ marginX: "auto", marginBottom: 2 }}
+						onClick={handleCart}
+					>
+						add to card
+					</Button>
+				</CardActions>
+			</Card>
+		</div>
 	);
 }

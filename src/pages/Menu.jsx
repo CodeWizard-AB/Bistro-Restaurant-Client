@@ -6,10 +6,14 @@ import salad from "../assets/menu/salad-bg.jpg";
 import soup from "../assets/menu/soup-bg.jpg";
 import pizza from "../assets/menu/pizza-bg.jpg";
 import dessert from "../assets/menu/dessert-bg.jpeg";
+import Helmet from "react-helmet";
 
 function Menu() {
 	return (
 		<div>
+			<Helmet>
+				<title>TastyTap | Menu</title>
+			</Helmet>
 			<Hero image={menuBanner} banner={true}>
 				<h2>our menu</h2>
 				<p>would you like to try a dish</p>
