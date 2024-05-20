@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
 	"& .MuiBadge-badge": {
@@ -26,10 +27,14 @@ export default function Badges() {
 	});
 
 	return (
-		<IconButton aria-label="cart">
-			<StyledBadge badgeContent={cart}>
-				<ShoppingCartIcon sx={{ color: "white" }} fontSize="large" />
-			</StyledBadge>
-		</IconButton>
+		cart > 0 && (
+			<Link to="/dashboard/cart">
+				<IconButton aria-label="cart">
+					<StyledBadge badgeContent={cart}>
+						<ShoppingCartIcon sx={{ color: "white" }} fontSize="large" />
+					</StyledBadge>
+				</IconButton>
+			</Link>
+		)
 	);
 }

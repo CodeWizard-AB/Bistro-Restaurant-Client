@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
-import { navigation } from "../constants";
+import { navigation } from "../constants/index";
 // import { IoAddCircleOutline } from "react-icons/io5";
 // import { MdOutlineFoodBank } from "react-icons/md";
 // import { BiFoodMenu } from "react-icons/bi";

@@ -3,7 +3,11 @@ export default {
 	darkMode: "class",
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				dashboard: "#D1A054",
+			},
+		},
 	},
 	plugins: [],
 };

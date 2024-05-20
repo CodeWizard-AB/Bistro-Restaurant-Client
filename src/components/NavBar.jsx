@@ -1,7 +1,7 @@
 import { Sling as Hamburger } from "hamburger-react";
 // import SimpleDrawer from "../components/Drawer";
 import { Link, NavLink } from "react-router-dom";
-import { navigation, navButtons } from "../constants";
+import { navigation, navButtons } from "../constants/index";
 import ButtonContainer from "./Button";
 import { useAuth } from "../contexts/AuthContext";
 import Account from "./Account";

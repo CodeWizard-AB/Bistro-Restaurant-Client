@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { signupForm } from "../constants";
-import signup from '../assets/others/authentication1.png'
+import { signupForm } from "../constants/index";
+import signup from "../assets/others/authentication1.png";
 import {
 	Checkbox,
 	FormControlLabel,
@@ -20,7 +20,6 @@ import Loader from "../components/Loader";
 import { boolean, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Helmet } from "react-helmet";
-
 
 function Signup() {
 	const { signUp, loading } = useAuth();

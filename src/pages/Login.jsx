@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
-import { loginForm } from "../constants";
+import { loginForm } from "../constants/index";
 import {
 	TextField,
 	IconButton,

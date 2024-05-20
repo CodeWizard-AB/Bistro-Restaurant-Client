@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { navigation } from "../constants";
+import { navigation } from "../constants/index";
 
 function Footer() {
 	return (
