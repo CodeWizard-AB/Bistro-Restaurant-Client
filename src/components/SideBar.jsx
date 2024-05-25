@@ -1,8 +1,12 @@
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { NavLink } from "react-router-dom";
-import { sideNav } from "../constants/index";
+import { userSideNav, adminSideNav } from "../constants/index";
+import useAdmin from "../hooks/useAdmin";
 
 function SideBar() {
+	const isAdmin = useAdmin();
+	const sideNav = isAdmin ? adminSideNav : userSideNav;
+
 	return (
 		<div className="fixed h-full">
 			<Sidebar className="h-full" rootStyles={{ backgroundColor: "#D1A054" }}>

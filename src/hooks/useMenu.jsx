@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxios from "./useAxios";
 
 function useMenu(category) {
+	const fetchData = useAxios();
 	const { data, isLoading } = useQuery({
 		queryKey: ["menuItems", category],
 		queryFn: async () => {
-			const { data } = await axios(
-				`http://localhost:4000/menu?category=${category}`
-			);
+			const { data } = await fetchData(`/menu?category=${category}`);
 			return data;
 		},
 	});

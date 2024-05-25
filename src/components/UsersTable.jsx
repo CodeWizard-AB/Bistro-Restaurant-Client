@@ -2,8 +2,12 @@ import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Modal from "./Modal";
+import { useState } from "react";
 
-function CartTable({ cart }) {
+function UsersTable({ users }) {
+	const [selectUser, setSelectUser] = useState(null);
+	const [open, setOpen] = useState(false);
 	const deleteData = useAxios();
 	const queryClient = useQueryClient();
 	const { mutate: handleDelete } = useMutation({
@@ -18,23 +22,26 @@ function CartTable({ cart }) {
 				confirmButtonText: "Yes, delete it!",
 			});
 			if (result.isConfirmed) {
-				await deleteData.delete(`/cart/${id}`);
+				await deleteData.delete(`/users/${id}`);
 				Swal.fire({
 					title: "Deleted!",
-					text: "Your order has been deleted.",
+					text: "Your guest has been deleted.",
 					icon: "success",
 				});
 			}
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries(["cartItems"]);
+			queryClient.invalidateQueries(["users"]);
 		},
 	});
 
 	return (
 		<section className="container mx-auto mt-10 mb-20 px-4 md:px-0">
+			{selectUser && (
+				<Modal open={open} setOpen={setOpen} selectUser={selectUser} />
+			)}
 			<Helmet>
-				<title>TastyTap | Cart</title>
+				<title>TastyTap | Users</title>
 			</Helmet>
 			<div className="flex flex-col mt-6">
 				<div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -44,33 +51,27 @@ function CartTable({ cart }) {
 								<thead className="bg-dashboard">
 									<tr className="text-white text-2xl py-4 grid grid-cols-[0.2fr_1fr_1fr_1fr_1fr] justify-items-center px-10">
 										<td></td>
-										<td>Item Image</td>
-										<td>Item Name</td>
-										<td>Price</td>
+										<td>Name</td>
+										<td>Email</td>
+										<td>Role</td>
 										<td>Action</td>
 									</tr>
 								</thead>
 								<tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-									{cart?.map((food, i) => (
+									{users?.map((user, i) => (
 										<tr
-											key={food._id}
+											key={user._id}
 											className="grid justify-items-center grid-cols-[0.2fr_1fr_1fr_1fr_1fr] items-center py-4 text-lg px-10"
 										>
 											<td>{i + 1}</td>
+											<td>{user.name}</td>
+											<td>{user.email}</td>
+											<td>{user.role}</td>
 											<td>
-												<img
-													src={food.image}
-													alt={food.image}
-													className="w-20 aspect-square object-cover"
-												/>
-											</td>
-											<td>{food.name}</td>
-											<td>${food.price}</td>
-											<td>
-												<div className="">
+												<div className="flex items-center gap-5">
 													<button
 														className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
-														onClick={() => handleDelete(food._id)}
+														onClick={() => handleDelete(user._id)}
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +91,10 @@ function CartTable({ cart }) {
 
 													<button
 														className="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none"
-														// onClick={handleEdit.bind(null, food._id)}
+														onClick={() => {
+															setOpen(true);
+															setSelectUser(user);
+														}}
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
@@ -121,4 +125,4 @@ function CartTable({ cart }) {
 	);
 }
 
-export default CartTable;
+export default UsersTable;

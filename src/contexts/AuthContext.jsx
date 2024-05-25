@@ -13,28 +13,36 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 import toast from "react-hot-toast";
+import useAxios from "../hooks/useAxios";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState();
 	const [loading, setLoading] = useState(false);
+	const fetchData = useAxios();
+
+	const saveUserData = async (name, email) => {
+		await fetchData.post("/users", {
+			name: name,
+			email: email,
+			role: "guest",
+		});
+	};
 
 	useEffect(() => {
-		const active = onAuthStateChanged(auth, (currentUser) => {
-			// fetchData
-			// 	.post("/sign-in", {
-			// 		email: currentUser?.email,
-			// 	})
-			// 	.then(({ data }) => {
-			// 		console.log(data);
-			// 	});
+		const active = onAuthStateChanged(auth, async (currentUser) => {
+			const { data } = await fetchData.post("/token-in", {
+				email: currentUser?.email,
+			});
+
+			localStorage.setItem("token", data.token);
 
 			setUser(currentUser);
 			setLoading(false);
 		});
 		return () => active();
-	}, []);
+	}, [fetchData]);
 
 	const signUp = async ({ username, password, photo, email }) => {
 		setLoading(true);
@@ -44,6 +52,7 @@ const AuthProvider = ({ children }) => {
 				displayName: username,
 				photoURL: photo,
 			});
+			await saveUserData(username, email);
 			toast.success("Sign up successfully");
 		} catch (_) {
 			toast.error("Failed to register");
@@ -82,7 +91,8 @@ const AuthProvider = ({ children }) => {
 			default:
 				throw new Error("Unknown provider");
 		}
-		await signInWithPopup(auth, provider);
+		const { user: curUser } = await signInWithPopup(auth, provider);
+		await saveUserData(curUser.displayName, curUser.email);
 		toast.success("Sign in successfully");
 	};
 
